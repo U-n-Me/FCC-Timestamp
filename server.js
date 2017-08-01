@@ -38,6 +38,15 @@ app.get('/:dateString', function(req, res){
   res.json(json);
 });
 
+app.get('/api/ip', function(req, res){
+  var json = {};
+  var sys = req.headers['user-agent'].split(' ').slice(1,4).join(' ');
+  res.jsonp({
+    'ip': req.headers["x-forwarded-for"].split(',')[0],
+    'language': req.headers['accept-language'].split(',')[0],
+    'system': sys.substr(1, sys.length - 2)
+  });
+});
 
 
 // listen for requests :)
